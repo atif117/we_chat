@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class DatabaseService {
   final _db = FirebaseFirestore.instance;
 
-  getUser(id) async {
+  Future<AppUser> getUser(id) async {
     debugPrint('@getUser: id: $id');
     try {
       final snapshot = await _db.collection("app_user").doc(id).get();
@@ -17,6 +17,7 @@ class DatabaseService {
       }
     } catch (e) {
       debugPrint("Exception @DatabaseService/getUser:$e");
+      return AppUser();
     }
   }
 
@@ -44,6 +45,18 @@ class DatabaseService {
       await _db.collection('app_user').doc(user.id).set(user.toJson());
     } catch (e) {
       debugPrint('Exception @DatabaseService/createAppUser');
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateUser(AppUser user) async {
+    debugPrint("@updateUser: id: ${user.id}");
+    try {
+      await _db.collection('app_user').doc(user.id).update(user.toJson());
+      return true;
+    } catch (e) {
+      debugPrint('Exception @DatabaseService/updateUser');
       debugPrint(e.toString());
       return false;
     }

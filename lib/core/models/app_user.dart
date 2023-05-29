@@ -7,6 +7,7 @@ class AppUser {
   String? pushToken;
   String? lastSeen;
   String? createdAt;
+  String? email;
 
   AppUser(
       {this.id,
@@ -16,7 +17,8 @@ class AppUser {
       this.profilePhoto,
       this.pushToken,
       this.lastSeen,
-      this.createdAt});
+      this.createdAt,
+      this.email});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = Map<String, dynamic>();
@@ -24,6 +26,7 @@ class AppUser {
     data["id"] = id;
     data["name"] = name;
     data['about'] = about;
+    data['email'] = email;
     data['isOnline'] = isOnline;
     data['profilePhoto'] = profilePhoto;
     data['pushToken'] = pushToken;
@@ -37,6 +40,7 @@ class AppUser {
     this.id = id;
     name = json['name'] ?? "";
     about = json['about'] ?? "";
+    email = json['email'] ?? "";
     isOnline = json['isOnline'] ?? false;
     profilePhoto = json['profilePhoto'];
     pushToken = json['pushToken'] ?? "";

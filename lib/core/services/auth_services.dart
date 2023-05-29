@@ -32,6 +32,7 @@ class AuthServices {
   }
 
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
+    final time = DateTime.now().millisecondsSinceEpoch.toString();
     UserCredential result;
     try {
       await InternetAddress.lookup('google.com');
@@ -61,12 +62,13 @@ class AuthServices {
       } else if (signupUser.id == null) {
         appUser = appUser;
         appUser.name = user?.displayName;
-        // appUser.about = "";
-        appUser.createdAt = DateTime.now().toString();
+        appUser.about = "Hey. I'm using We chat app";
+        appUser.createdAt = time;
         appUser.id = user?.uid;
-        // appUser.lastSeen = DateTime.now().toString();
+        appUser.lastSeen = time;
         appUser.profilePhoto = user?.photoURL;
-        // appUser.isOnline = false;
+        appUser.isOnline = false;
+        appUser.email = user?.email;
         // appUser.pushToken = "";
         await _dbService.createAppUser(appUser);
       }
