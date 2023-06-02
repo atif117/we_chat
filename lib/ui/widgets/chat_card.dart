@@ -33,10 +33,16 @@ class _ChatCardState extends State<ChatCard> {
             "${widget.user.about}",
             maxLines: 1,
           ),
-          trailing: const Text(
-            "12:00 pm",
-            style: TextStyle(color: Colors.black54),
-          ),
+          trailing: Container(
+              height: mq.height * 0.028,
+              width: mq.width * 0.028,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: widget.user.isOnline! ? Colors.green : Colors.grey)),
+          // trailing: const Text(
+          //   "12:00 pm",
+          //   style: TextStyle(color: Colors.black54),
+          // ),
         ),
       ),
     );
